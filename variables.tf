@@ -5,12 +5,12 @@ variable "public_key_path" {
 
 variable "ami_id_east" {
   description = "AMI ID for East region"
-  default     = "ami-0abcdef1234567890"  # Replace with your desired AMI ID for the East region
+  default     = "ami-02f7f38e06e586791"  # Replace with your desired AMI ID for the East region
 }
 
 variable "ami_id_west" {
   description = "AMI ID for West region"
-  default     = "ami-0abcdef1234567890"  # Replace with your desired AMI ID for the West region
+  default     = "ami-0d3b80bc1bf64610c"  # Replace with your desired AMI ID for the West region
 }
 
 variable "instance_type" {
