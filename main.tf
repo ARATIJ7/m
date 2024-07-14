@@ -92,7 +92,7 @@ resource "aws_security_group" "east_mongodb_sg" {
 
 resource "aws_instance" "east_mongodb_instance" {
   provider = aws.east
-  ami = var.ami_id
+  ami = var.ami_id_east
   instance_type = var.instance_type
   key_name = aws_key_pair.mongodb_key.key_name
   subnet_id = aws_subnet.east_subnet.id
@@ -184,7 +184,7 @@ resource "aws_security_group" "west_mongodb_sg" {
 
 resource "aws_instance" "west_mongodb_instance" {
   provider = aws.west
-  ami = var.ami_id
+  ami = var.ami_id_west
   instance_type = var.instance_type
   key_name = aws_key_pair.mongodb_key.key_name
   subnet_id = aws_subnet.west_subnet.id
