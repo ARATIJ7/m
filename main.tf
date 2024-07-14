@@ -8,11 +8,6 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_key_pair" "mongodb_key" {
-  key_name   = "mongodb-key"
-  public_key = file(var.public_key_path)
-}
-
 # VPC for East Region
 resource "aws_vpc" "east_vpc" {
   provider = aws.east
@@ -95,7 +90,7 @@ resource "aws_instance" "east_mongodb_instance" {
   provider = aws.east
   ami = var.ami_id_east
   instance_type = var.instance_type
-  key_name = aws_key_pair.mongodb_key.key_name
+  key_name = var.key_name
   subnet_id = aws_subnet.east_subnet.id
   vpc_security_group_ids = [aws_security_group.east_mongodb_sg.id]
   associate_public_ip_address = true
@@ -189,7 +184,7 @@ resource "aws_instance" "west_mongodb_instance" {
   provider = aws.west
   ami = var.ami_id_west
   instance_type = var.instance_type
-  key_name = aws_key_pair.mongodb_key.key_name
+  key_name = var.key_name
   subnet_id = aws_subnet.west_subnet.id
   vpc_security_group_ids = [aws_security_group.west_mongodb_sg.id]
   associate_public_ip_address = true
