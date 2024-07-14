@@ -3,9 +3,14 @@ variable "public_key_path" {
   default     = "~/.ssh/mongodb-key.pub"
 }
 
-variable "ami_id" {
-  description = "AMI ID"
-  default     = "ami-0abcdef1234567890"  # Replace with your desired AMI ID
+variable "ami_id_east" {
+  description = "AMI ID for East region"
+  default     = "ami-0abcdef1234567890"  # Replace with your desired AMI ID for the East region
+}
+
+variable "ami_id_west" {
+  description = "AMI ID for West region"
+  default     = "ami-0abcdef1234567890"  # Replace with your desired AMI ID for the West region
 }
 
 variable "instance_type" {
