@@ -27,6 +27,7 @@ resource "aws_subnet" "east_subnet" {
   vpc_id = aws_vpc.east_vpc.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-east-2a"
+  map_public_ip_on_launch = true
   tags = {
     Name = "East-Subnet"
   }
@@ -97,6 +98,7 @@ resource "aws_instance" "east_mongodb_instance" {
   key_name = aws_key_pair.mongodb_key.key_name
   subnet_id = aws_subnet.east_subnet.id
   vpc_security_group_ids = [aws_security_group.east_mongodb_sg.id]
+  associate_public_ip_address = true
 
   user_data = file(var.user_data_east)
 
@@ -119,6 +121,7 @@ resource "aws_subnet" "west_subnet" {
   vpc_id = aws_vpc.west_vpc.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-west-2a"
+  map_public_ip_on_launch = true
   tags = {
     Name = "West-Subnet"
   }
@@ -189,6 +192,7 @@ resource "aws_instance" "west_mongodb_instance" {
   key_name = aws_key_pair.mongodb_key.key_name
   subnet_id = aws_subnet.west_subnet.id
   vpc_security_group_ids = [aws_security_group.west_mongodb_sg.id]
+  associate_public_ip_address = true
 
   user_data = file(var.user_data_west)
 
