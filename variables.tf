@@ -1,6 +1,6 @@
-variable "public_key_path" {
-  description = "Path to the public key file"
-  default     = "/root/.ssh/mongodb-key.pub"
+variable "key_name" {
+  description = "Name of the existing key pair"
+  default     = mongodb-key
 }
 
 variable "ami_id_east" {
