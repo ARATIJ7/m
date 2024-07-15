@@ -1,6 +1,6 @@
 variable "key_name" {
   description = "Name of the existing key pair"
-  default     = mongodb-key
+  type        =  string
 }
 
 variable "ami_id_east" {
