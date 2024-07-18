@@ -20,7 +20,7 @@ sudo systemctl enable mongod
 sudo systemctl start mongod
 
 # Configure MongoDB replication
-cat <<EOL | sudo tee -a /etc/mongod.conf
+cat <<EOL | sudo tee /etc/mongod.conf
 replication:
   replSetName: "rs0"
 net:
@@ -29,6 +29,3 @@ EOL
 
 # Restart MongoDB to apply changes
 sudo systemctl restart mongod
-
-# Add this instance to the replica set (replace <EAST_INSTANCE_IP> with the actual IP)
-mongo --eval 'rs.add("<EAST_INSTANCE_IP>:27017")'
