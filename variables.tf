@@ -5,12 +5,12 @@ variable "key_name" {
 
 variable "ami_id_east" {
   description = "AMI ID for East region"
-  default     = "ami-02f7f38e06e586791"  # Replace with your desired AMI ID for the East region
+  default     = "ami-0bcdb47863b39579f"  # Replace with your desired AMI ID for the East region
 }
 
 variable "ami_id_west" {
   description = "AMI ID for West region"
-  default     = "ami-0d3b80bc1bf64610c"  # Replace with your desired AMI ID for the West region
+  default     = "ami-0323ead22d6752894"  # Replace with your desired AMI ID for the West region
 }
 
 variable "instance_type" {
@@ -18,12 +18,3 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "user_data_east" {
-  description = "User data script for East region"
-  default     = "userdata-east.sh"
-}
-
-variable "user_data_west" {
-  description = "User data script for West region"
-  default     = "userdata-west.sh"
-}
