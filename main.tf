@@ -95,7 +95,7 @@ resource "aws_instance" "east_mongodb_instance" {
   vpc_security_group_ids = [aws_security_group.east_mongodb_sg.id]
   associate_public_ip_address = true
 
-  user_data = file(var.user_data_east)
+  user_data = file("user_data_east.sh")
 
   tags = {
     Name = "East-MongoDB-Instance"
@@ -189,7 +189,7 @@ resource "aws_instance" "west_mongodb_instance" {
   vpc_security_group_ids = [aws_security_group.west_mongodb_sg.id]
   associate_public_ip_address = true
 
-  user_data = file(var.user_data_west)
+  user_data = file("user_data_west.sh")
 
   tags = {
     Name = "West-MongoDB-Instance"
