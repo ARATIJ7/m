@@ -20,7 +20,7 @@ sudo systemctl enable mongod
 sudo systemctl start mongod
 
 # Configure MongoDB replication
-cat <<EOL | sudo tee -a /etc/mongod.conf
+cat <<EOL | sudo tee /etc/mongod.conf
 replication:
   replSetName: "rs0"
 net:
@@ -30,5 +30,10 @@ EOL
 # Restart MongoDB to apply changes
 sudo systemctl restart mongod
 
-# Initialize the replica set (run only on one instance)
-mongo --eval 'rs.initiate()'
+# Initialize the replica set (run only on the primary instance)
+if [ "$(curl http://169.254.169.254/latest/meta-data/instance-id)" == "PRIMARY_INSTANCE_ID" ]; then
+  mongo --eval 'rs.initiate()'
+  sleep 10
+  mongo --eval 'rs.add("SECONDARY_INSTANCE_PRIVATE_IP:27017")'
+  mongo --eval 'rs.add("ARBITER_INSTANCE_PRIVATE_IP:27017")'
+fi
