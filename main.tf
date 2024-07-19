@@ -180,7 +180,7 @@ resource "aws_security_group" "west_mongodb_sg" {
   }
 }
 
-resource "aws_instance" "west_mongodb_instance" {
+resource "aws_instance" "west_mongodb_instance_1" {
   provider = aws.west
   ami = var.ami_id_west
   instance_type = var.instance_type
@@ -192,7 +192,23 @@ resource "aws_instance" "west_mongodb_instance" {
   user_data = file("userdata-west.sh")
 
   tags = {
-    Name = "West-MongoDB-Instance"
+    Name = "West-MongoDB-Instance-1"
+  }
+}
+
+resource "aws_instance" "west_mongodb_instance_2" {
+  provider = aws.west
+  ami = var.ami_id_west
+  instance_type = var.instance_type
+  key_name = var.key_name
+  subnet_id = aws_subnet.west_subnet.id
+  vpc_security_group_ids = [aws_security_group.west_mongodb_sg.id]
+  associate_public_ip_address = true
+
+  user_data = file("userdata-west.sh")
+
+  tags = {
+    Name = "West-MongoDB-Instance-2"
   }
 }
 
@@ -200,6 +216,10 @@ output "east_instance_public_ip" {
   value = aws_instance.east_mongodb_instance.public_ip
 }
 
-output "west_instance_public_ip" {
-  value = aws_instance.west_mongodb_instance.public_ip
+output "west_instance_1_public_ip" {
+  value = aws_instance.west_mongodb_instance_1.public_ip
+}
+
+output "west_instance_2_public_ip" {
+  value = aws_instance.west_mongodb_instance_2.public_ip
 }
