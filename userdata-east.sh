@@ -22,6 +22,16 @@ systemctl enable mongod
 # Allow remote access to MongoDB (optional, be cautious with security)
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
 
+# Enable replication in the MongoDB configuration file
+cat >> /etc/mongod.conf << EOL
+
+replication:
+  replSetName: "rs0"
+EOL
+
+# Restart MongoDB to apply the changes
+systemctl restart mongod
+
 # Setup MongoDB Replica Set
 PRIMARY_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
 SECONDARY_IP1="${element(aws_instance.west_mongodb_instance_1.*.private_ip, 0)}"
