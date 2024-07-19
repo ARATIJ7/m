@@ -1,6 +1,7 @@
 variable "key_name" {
   description = "Name of the existing key pair"
   type        =  string
+  default     = "project"
 }
 
 variable "ami_id_east" {
