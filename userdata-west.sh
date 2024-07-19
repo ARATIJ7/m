@@ -21,3 +21,13 @@ systemctl enable mongod
 
 # Allow remote access to MongoDB (optional, be cautious with security)
 sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/' /etc/mongod.conf
+
+# Enable replication in the MongoDB configuration file
+cat >> /etc/mongod.conf << EOL
+
+replication:
+  replSetName: "rs0"
+EOL
+
+# Restart MongoDB to apply the changes
+systemctl restart mongod
