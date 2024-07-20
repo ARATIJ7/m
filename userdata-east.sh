@@ -52,3 +52,6 @@ EOF
 mongo --eval "rs.initiate()"  # Initial setup
 sleep 10  # Wait for the primary to stabilize
 mongo < /tmp/rs.js
+
+# Check Replica Set status
+mongo --eval "rs.status()"
