@@ -34,24 +34,25 @@ systemctl restart mongod
 
 # Setup MongoDB Replica Set
 PRIMARY_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
-SECONDARY_IP1="${element(aws_instance.west_mongodb_instance_1.*.private_ip, 0)}"
-SECONDARY_IP2="${element(aws_instance.west_mongodb_instance_2.*.private_ip, 0)}"
+SECONDARY_IP1="PUT_SECONDARY_IP1_HERE"
+SECONDARY_IP2="PUT_SECONDARY_IP2_HERE"
 
-cat > /tmp/rs.js <<-EOF
-  rs.initiate({
-    _id: "rs0",
-    members: [
-      { _id: 0, host: "$PRIMARY_IP:27017" },
-      { _id: 1, host: "$SECONDARY_IP1:27017" },
-      { _id: 2, host: "$SECONDARY_IP2:27017" }
-    ]
-  })
+cat > /tmp/rs.js <<EOF
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "$PRIMARY_IP:27017" },
+    { _id: 1, host: "$SECONDARY_IP1:27017" },
+    { _id: 2, host: "$SECONDARY_IP2:27017" }
+  ]
+})
 EOF
 
 # Execute the Replica Set configuration script
-mongo --eval "rs.initiate()"  # Initial setup
-sleep 10  # Wait for the primary to stabilize
 mongo < /tmp/rs.js
+
+# Wait for the replica set to stabilize
+sleep 20
 
 # Check Replica Set status
 mongo --eval "rs.status()"
