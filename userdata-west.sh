@@ -31,3 +31,12 @@ EOL
 
 # Restart MongoDB to apply the changes
 systemctl restart mongod
+
+# Wait for the replica set to stabilize
+sleep 20
+
+# Execute rs.secondaryOk() on this node
+mongo --eval "rs.secondaryOk()"
+
+# Check Replica Set status
+mongo --eval "rs.status()"
