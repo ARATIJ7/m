@@ -1,11 +1,15 @@
 provider "aws" {
-  alias  = "us-east-2"
+  alias  = "east"
   region = "us-east-2"
+  access_key = var.aws_access_key_id_east
+  secret_key = var.aws_secret_access_key_east
 }
 
 provider "aws" {
-  alias  = "us-west-2"
+  alias  = "west"
   region = "us-west-2"
+  access_key = var.aws_access_key_id_west
+  secret_key = var.aws_secret_access_key_west
 }
 
 # VPC for East Region
